@@ -37,7 +37,7 @@ fun Route.customerRouting(){
         delete("{id}"){
             val id = call.parameters["id"] ?: return@delete call.respond(HttpStatusCode.BadRequest)
             if(customerStorage.removeIf { it.id == id }) {
-                call.respond("Customer removed correctly", status = HttpStatusCode.Accepted)
+                call.respondText("Customer removed correctly", status = HttpStatusCode.Accepted)
             }else {
                 call.respondText("Not Found", status = HttpStatusCode.NotFound)
             }
@@ -50,3 +50,4 @@ fun Application.registerCustomerRoute(){
         customerRouting()
     }
 }
+
